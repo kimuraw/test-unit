@@ -24,10 +24,21 @@ Here are examples of the `--pattern` option:
 Here are examples of the `--testcase` option:
 
     $ grep -r class test/
-      : (TODO)
-    $ ruby test/run_test.rb -v --testcase=TESTCASE
-    $ ruby test/run_test.rb -v --testcase=/PATTERN/
-    $ ruby test/run_test.rb -v --testcase=/PATTERN/ --ignore-testcase=/PATTERN/
+    test/test_attribute.rb:class TestOptAttribute < Test::Unit::TestCase
+    test/test_attribute.rb:class TestOptAttribute_Description < Test::Unit::TestCase
+    test/test_location.rb:class TestOptLocation < Test::Unit::TestCase
+    test/test_name.rb:class TestOptName < Test::Unit::TestCase
+    $ ruby test/run_test.rb -v --testcase=TestOptName
+    # => TestOptName:
+    #     :
+    $ ruby test/run_test.rb -v --testcase=/Attribute/
+    # => TestOptAttribute:
+    #      :
+    #    TestOptAttribute_Description:
+    #      :
+    $ ruby test/run_test.rb -v --testcase=/Attribute/ --ignore-testcase=/Desc/
+    # => TestOptAttribute:
+    #      :
 
 ### by test (method)
 
