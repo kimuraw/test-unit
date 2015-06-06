@@ -39,24 +39,71 @@ Here are examples of the `--testcase` option:
 Here are examples of the `--name` option:
 
     $ cat test/test_name.rb
-      : (TODO)
-    $ ruby test/test_name.rb -v --name=NAME
-    $ ruby test/test_name.rb -v --name=/PATTERN/
+    require 'test/unit'
+    
+    class TestOptName < Test::Unit::TestCase
+        def test_foo; end
+        def test_bar; end
+        def test_baz; end
+    end
+    $ ruby test/test_name.rb -v --name=test_foo
+    # => TestOptName:
+    #      test_foo: ..
+    $ ruby test/test_name.rb -v --name=/ba/
+    # => TestOptName:
+    #      test_bar: ..
+    #      test_baz: ..
 
 Here are examples of the `--location` option:
 
     $ cat -n test/test_location.rb
-      : (TODO)
-    $ ruby test/test_location.rb -v --location=NN
-    $ ruby test/run_test.rb -v --location=test_location.rb:NN
+         1      require 'test/unit'
+         2      
+         3      class TestOptLocation < Test::Unit::TestCase
+         4          def test_linno; end
+         5      
+         6          def test_filename_and_linno
+         7              #
+         8          end
+         9      end
+    $ ruby test/test_location.rb -v --location=4
+    # => TestOptLocation:
+    #      test_linno: ..
+    $ ruby test/run_test.rb -v --location=test_location.rb:7
+    # => TestOptLocation:
+    #      test_filename_and_linno: ..
 
 Here are examples of the `--attribute` option:
 
     $ cat test/test_attribute.rb
-      : (TODO)
+    require 'test/unit'
+    
+    class TestOptAttribute < Test::Unit::TestCase
+        attribute :priority, :critical
+        def test_essential_feature; end
+    
+        attribute :slow, true
+        def test_manymany_calculation; end
+    
+        attribute :priority, :low
+        def test_experimental_feature; end
+    end
+    
+    class TestOptAttribute_Description < Test::Unit::TestCase
+        description 'knownbugs issue#1234'
+        attribute :slow, true
+        def test_should_be_fixed; end
+    end
     $ ruby test/test_attribute.rb -v --attribute='priority == :critical'
+    # => TestOptAttribute:
+    #      test_essential_feature: ..
     $ ruby test/test_attribute.rb -v --attribute='!slow'
-    $ ruby test/test_attribute.rb -v --attribute='descripyion =~ //'
+    # => TestOptAttribute:
+    #      test_essential_feature: ..
+    #      test_experimental_feature: ..
+    $ ruby test/test_attribute.rb -v --attribute='description =~ /knownbugs/'
+    # => TestOptAttribute_Description:
+    #      test_should_be_fixed: ..
 
 ## All options
 
