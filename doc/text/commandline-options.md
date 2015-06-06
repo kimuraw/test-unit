@@ -159,7 +159,8 @@ Test::Unit prints help message with the `-h` or `--help` option.
             --order=ORDER                Run tests in a test case in ORDER order.
                                          (a[lphabetic], d[efined], r[andom])
             --max-diff-target-string-size=SIZE
-                                         Shows diff if both expected result string size and actual result string size are less than or equal SIZE in bytes.
+                                         Shows diff if both expected result string size and actual
+                                         result string size are less than or equal SIZE in bytes.
                                          (1000)
         -v, --verbose=[LEVEL]            Set the output level (default is verbose).
                                          (important-only, n[ormal], p[rogress], s[ilent], v[erbose])
