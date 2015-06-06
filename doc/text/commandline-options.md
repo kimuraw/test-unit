@@ -118,7 +118,7 @@ Here are examples of the `--attribute` option:
 
 ## All options
 
-Test::Unit prints help message with the `-h` or `--help` option.
+Test::Unit prints all options with the `-h` or `--help` option.
 
     $ ruby test/run_test.rb --help
     Test::Unit automatic runner.
