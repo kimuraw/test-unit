@@ -126,7 +126,7 @@ Here are examples of the `--exclude` option:
     #    TestOptName:
     #      :
 
-Note that the `--pattern` option DOES NOT filter tests by filename. The option appends file(s) to default target files (test[_-]\*.rb and \*[_-]test.rb).
+Note that the `--pattern` option DOES NOT filter tests by filename. The option appends file(s) to default target files (test[\_-]\*.rb and \*[\_-]test.rb).
 
     $ ls -1 test
     foo.rb
