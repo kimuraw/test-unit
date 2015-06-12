@@ -2,20 +2,6 @@
 
 ## Run specify tests
 
-### by file
-
-- -p, --pattern=PATTERN
-- -x, --exclude=PATTERN
-
-Here are examples of the `--pattern` option:
-
-    $ ls test/
-      : (TODO)
-    $ grep -r class test/
-      : (TODO)
-    $ ruby test/run_test.rb -v --pattern=FILENAME
-    $ ruby test/run_test.rb -v --pattern=/PATTERN/
-
 ### by test case (class)
 
 - -t, --testcase=TESTCASE
@@ -115,6 +101,41 @@ Here are examples of the `--attribute` option:
     $ ruby test/test_attribute.rb -v --attribute='description =~ /knownbugs/'
     # => TestOptAttribute_Description:
     #      test_should_be_fixed: ..
+
+### by file
+
+- -x, --exclude=PATTERN
+
+Here are examples of the `--exclude` option:
+
+    $ ls -1 test/
+    run_test.rb
+    test_attribute.rb
+    test_location.rb
+    test_name.rb
+    $ grep -r class test/
+    test/test_attribute.rb:class TestOptAttribute < Test::Unit::TestCase
+    test/test_attribute.rb:class TestOptAttribute_Description < Test::Unit::TestCase
+    test/test_location.rb:class TestOptLocation < Test::Unit::TestCase
+    test/test_name.rb:class TestOptName < Test::Unit::TestCase
+    $ ruby test/run_test.rb -v --exclude=/location/
+    # => TestOptAttribute:
+    #      :
+    #    TestOptAttribute_Description:
+    #      :
+    #    TestOptName:
+    #      :
+
+Note that the `--pattern` option DOES NOT filter tests by filename. The option appends file(s) to default target files (test[_-]\*.rb and \*[_-]test.rb).
+
+    $ ls -1 test
+    foo.rb
+    run_test.rb
+    test_attribute.rb
+    test_location.rb
+    test_name.rb
+    $ ruby test/run_test.rb -v --pattern=foo.rb
+    # run tests in foo.rb and test_*.rb
 
 ## All options
 
